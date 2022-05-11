@@ -6,6 +6,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab+Highlight:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
 
 <style>
 .container {
@@ -20,17 +21,84 @@
 	color: white;
 	font-size:30px;
 }
+.main {
+	font-family: "Zilla Slab Highlight", cursive;
+	background-color: #eb7d34;
+	color: white;
+	font-size:50px;
+}
+.text {
+	font-family: "Zilla Slab", cursive;
+	color: white;
+	font-size:20px;
+}
+.text2 {
+	font-family:Arial,Helvetica,sans-serif;
+	color: white;
+	font-size:14px;
+}
 </style>
 </head>
 
 
 <body style="background-color:#eb7d34;">
-<div class="container">
-	<span>midimeister.com</span>
-	<span><a href="https://www.youtube.com/channel/UCEktwKA1Luwr55ha3XFGywQ">Youtube</a>
-	<span>
-		<iframe width="560" height="315" src="https://www.youtube.com/embed/ScyFz4MWaa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	</span>
+<p style="text-align:center" class="main">midimeister.com</p>
+<div class="text2">
+<p style="text-align:center">The midimeister offers a simple way to procedurally generate musical ideas based on the incoming Midi signal and the chosen modules. It is built to allow the musician to generate complex musical ideas when improvising while still staying in control of the output. It is inspired by Midi tools like the Squarp Pyramid, the NDLR but also Eurorack modules like the Turing Machine, Mutable Instruments Grids or even a simple quantizer.<br />
+<br />
+<span class="text">
+For that it offers four different areas:<br />
+</span>
+<br />
+<span class="text2">
+* Connect midi over USB, USB host and DIN. For each source and target can be defined if it sends or receives timing clock and if it sends or receives note/cc data.<br />
+* Midi note effects that modify the incoming note signal can be applied individually or chained.<br />
+* CC effects offer modules from simple timed LFOs, over sample-and-hold, note-to-cc conversion to expression-pedal output.<br />
+* The sequencer part offers an euclidean sequencer, an implementation of Mutable Instruments Grids as well as a mix of both. These notes can be fed back into Midi note effects or their trigger signal can be used in some of the effects (e.g. for the arpeggiator&#39;s timing).<br />
+<br />
+The user can choose a global note offset track that will be used to change the pitch of outgoing notes based on its difference to C3. Any outgoing note can finally be forced/quantized into a specific scale.<br />
+<br />
+</span>
+<span class="text">
+Available note effects</p>
+</span>
+<span class="text2">
+
+<p style="text-align:center">&quot;Arpeggiator&quot;: typical arpeggiator effect. Can be timed by the euclidean sequencer (can also use the three euclidean sequencer notes to choose which of the incoming notes to play).<br />
+&quot;Chord&quot;: builds a chord around the incoming note. &ldquo;<br />
+Delay&quot;: sends out copies of the incoming note with a time offset. Can also move the note up or down, fade out the velocity and randomize its speed.<br />
+&quot;Euclidean&quot;: generates outgoing notes based on a euclidean sequence.<br />
+&quot;Force&quot;: forces the note or velocity to a specific value.<br />
+&ldquo;Jump&rdquo;: moves every n-th incoming note up or down by a specific amount.<br />
+&quot;LFO&quot;: offsets the incoming note by a sine wave.<br />
+&quot;Move&#39;n&#39;Mute&quot;: moves incoming notes to a different channel or mutes notes on a channel.<br />
+&quot;Octatrack&rdquo;: allows to play sample slices on the Octratrack by sending out a CC signal before triggering the note (this was not able on the Octatrack until recently).<br />
+&ldquo;Paraphonic&quot;: allows synthesizers with two oscillators which offer a CC offset for the second oscillator to be played paraphonically by sending a CC signal for the offset if a first note had already been played.<br />
+&ldquo;Pedal Offset&quot;: offsets the incoming signal based on the expression pedal.<br />
+&quot;Random&quot;: randomizes either the incoming note value, the incoming velocity value or randomly skips the incoming note off.<br />
+&ldquo;Random Sequence&rdquo;: Offers 999 &lsquo;random&rsquo; sequences that can be up to 32 steps and be scaled in note width and gate length.<br />
+&quot;Scale&quot;: forces the incoming note into a specific scale - similar to the global option but on a per channel basis.<br />
+&quot;Split Channel&quot;: copies the incoming note to other channels with the option to offset their note value.<br />
+&ldquo;Split Key&quot;: the note range (C-1 to G9) is split up so that higher incoming notes are sent to a different channel.<br />
+&quot;Split Note&quot;: if the user plays more than one note at a time those notes are sent to other channels (e.g. to spread polyphonic notes to different synthesizers). Can also be used to send every other note on a different channel.<br />
+&ldquo;Subdivide&quot;: subdivides long incoming notes into multiple ones. Offers the option to leave out specific ones to add rhythm.<br />
+&quot;Turing Machine&quot;: implements a turing machine. A random sequence of note and gate values can be individually updated and trigger a sequence of outgoing notes.</p>
+
+<p style="text-align:center" class="text">CC modules</p>
+<p style="text-align:center">have a channel, a CC type (including pitch shift, aftertouch and note) and a min/max range (0-127) which can be inverted.</p>
+<p style="text-align:center">&quot;AHR&quot;: simplified ADSR which offers attack, hold and release on any incoming notes on a specific channel.<br />
+&ldquo;Copy&rdquo;: copies a CC value to a different channel and/or CC.<br />
+&ldquo;Duck Midi&quot;: based on any incoming notes on a specific channel a CC value is generated that quickly drops and falls back (or the other way around).<br />
+&quot;Note to CC&quot;: incoming notes on a specific channel are translated in CC values. Either in a one octave range from C3 or over the whole note range.<br />
+&quot;Pedal&quot;: applies the value from a connected expression pedal onto a CC value.<br />
+&quot;Pedal Rec&quot; [WIP]: will allow to record the signal from the expression pedal and play it back looped.<br />
+&ldquo;Random&quot;: random value that can update freely, be time synced and/or be retriggered by any incoming note.<br />
+&ldquo;Random Hold&quot;: same as Random but will always be either the set min or max value and jump between them based on a given chance.<br />
+&quot;Sine&quot;, &ldquo;Square&rdquo;, &quot;Triangle&quot;: simple LFOs that can run free, be time synced and/or be retriggered by any incoming note.</p>
 </div>
+<iframe style="display: block; margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/ScyFz4MWaa0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe style="display: block; margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/scPS6eFyK28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe style="display: block; margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/scPS6eFyK28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<p>&nbsp;</p>
 </body>
 </html>
